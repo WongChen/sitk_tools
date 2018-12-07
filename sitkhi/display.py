@@ -4,6 +4,8 @@ from ipywidgets import interact, fixed
 def show_slices(slices, title=None):
     """ Function to display row of image slices """
     fig, axes = plt.subplots(1, len(slices))
+    if len(slices) == 1:
+        axes = [axes]
     for i, slice in enumerate(slices):
         axes[i].imshow(slice.T, cmap="gray", origin="lower")
         if title is not None:
@@ -16,6 +18,8 @@ def display3(direction, slices):
         slices: List of 3d numpy arrays.
 
     '''
+    if len(slices) < 1:
+        raise ValueError("input volume list must have at least 1 array input")
     if direction.lower() not in ['axial', 'sagittal', 'coronal']:
         raise ValueError('direction must be one of {}'.format('axial, sagittal, coronal'))
     direction = direction.lower()
