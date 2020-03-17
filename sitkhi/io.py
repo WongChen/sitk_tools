@@ -14,4 +14,5 @@ def save_sitk(itk_img, nda, save_name):
     image.SetDirection(itk_img.GetDirection())
     writer = sitk.ImageFileWriter()
     writer.SetFileName(save_name)
+    writer.UseCompression(True)
     writer.Execute(image)
